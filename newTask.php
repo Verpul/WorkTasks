@@ -2,7 +2,7 @@
 if($_POST['addmission']){
 	echo "<html><head></head><body>
 		<h2>Добавить новую задачу</h2>
-		<form action='newMission.php' method='post'>
+		<form action='newTask.php' method='post'>
 		<select size='1' name='priority'>
 			<option disabled selected>Приоритет задачи</option>
 			<option value='High'>Высокий</option>
@@ -19,9 +19,9 @@ if($_POST['addmission']){
 	if(empty($_POST['comment'])  || $_POST['priority'] == "Приоритет задачи"){
 		echo "Заполните все поля";
 	}else{
-		header('Location: missions.php');
+		header('Location: tasks.php');
 		include("connect.php");
-		$time = date("Y-m-d");
+		$time = date("Y:m:d H:i:s");
 		$query = "INSERT INTO missions(priority, comment, closed, date) VALUES (\"{$_POST['priority']}\", \"{$_POST['comment']}\", 
 																				'0', CAST('".$time."' AS datetime))";
 		mysql_query($query);
