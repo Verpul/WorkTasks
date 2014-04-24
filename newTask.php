@@ -1,4 +1,5 @@
 <?php
+include("session.php");
 if($_POST['addmission']){
 	echo "<html><head></head><body>
 		<h2>Добавить новую задачу</h2>

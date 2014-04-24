@@ -11,6 +11,7 @@ if(empty($_POST['username']) || empty($_POST['password'])){
 	$result = mysql_query($query);
 	if(mysql_num_rows($result) > 0){
 		header("Location: tasks.php");
+		$_SESSION['logged'] = true;
 	} else {
 		$_SESSION['error'] = "Неверный логин или пароль";
 		header("Location: index.php");

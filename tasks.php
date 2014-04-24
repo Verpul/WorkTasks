@@ -1,5 +1,13 @@
+<?php
+include("session.php");
+?>
 <html>
 <head>
+	<script type="text/javascript">
+		function disabled(){
+
+		}
+	</script>
 </head>
 <body>
 	<h2>Мои задачи</h2>
@@ -9,9 +17,6 @@
 	 </form>
 <?php
 /*
-Добавить задачу
-Дата
-Приоритет(.jpg)/Описание/Закрыта или нет - если нет - кнопка закрыть/Редактировать(Удалить)
 Номер страницы 
 */
 	if(!empty($_POST['close'])){
@@ -28,7 +33,7 @@
 	echo "<table border='1'>
 			<tr><td>Приоритет</td><td>Описание</td><td>Статус</td></tr>";	
 	while($row = mysql_fetch_assoc($result)){
-		$i++;
+		$disable = $row['closed'] == 0 ? '':'disabled';
 		$status = $row['closed'] == 0 ? 'Не выполнена':'Выполнена';
 		
 		$firstDate = substr($row['date'], 0, 10);
@@ -42,10 +47,10 @@
 				<td>{$row['comment']}</td>
 				<td>{$status}</td>
 				<form action='tasks.php' method='post'>
-				<td><input type='submit' name = 'close[{$row['id']}]' value='Закрыть'></td>
+				<td><input type='submit' name = 'close[{$row['id']}]' value='Закрыть' $disable /></td>
 				</form>	
 				<form action='updateTask.php' method='post'>
-				<td><input type='submit' name = 'change' value='Редактировать'></td></tr>
+				<td><input type='submit' name = 'update[{$row['id']}]' value='Редактировать' $disable /></td></tr>
 				</form>";
 	}
 	echo "</table>";
