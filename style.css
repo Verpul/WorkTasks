@@ -1,0 +1,56 @@
+html{
+	background: #212121;
+}
+
+h2{
+	color: white;
+	text-align: center;
+}
+
+#middle_section {
+	width: 100%;
+	background-image: url(images/templatemo_middle_bg.jpg);
+	background-position: bottom;
+	background-color: #346c7c;
+	background-repeat: repeat-x;
+	padding-top: 20px; 
+	padding-bottom: 20px;
+}
+
+table{
+	
+}
+
+td{
+	color: #ffebb5;
+}
+
+h5{
+	text-align: center;
+	color: #b0b0b0;
+}
+
+#time{
+	text-align: center;
+}
+
+#comment {
+	width: 400px;
+}
+
+#center {
+	text-align: center;
+}
+
+#tasksTable{
+	border-spacing: 0;
+  
+}
+
+.tableBorder{
+	border-bottom: 1px solid #cdcdcd;
+	border-left: 1px solid #cdcdcd;
+	border-right: 1px solid #cdcdcd;
+	border-top: 1px solid #cdcdcd;
+}
+

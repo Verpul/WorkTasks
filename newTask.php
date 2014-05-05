@@ -1,24 +1,28 @@
 <?php
 include("session.php");
-if($_POST['addmission']){
-	echo "<html><head></head><body>
+if($_POST['addmission'] || empty($_POST['addnew'])){
+	echo "<html><head><link href='style.css' rel='stylesheet' type='text/css' /> </head><body>
 		<h2>Добавить новую задачу</h2>
-		<form action='newTask.php' method='post'>
-		<select size='1' name='priority'>
-			<option disabled selected>Приоритет задачи</option>
-			<option value='High'>Высокий</option>
-			<option value='Medium'>Средний</option>
-			<option value='Low'>Низкий</option>
-		</select>	
-		<textarea rows = '4' cols = '60' name='comment'></textarea>
-		<input type='submit' name='addnew' value='Добавить задачу' />
-		</form>
+		<div id='middle_section'>
+			<div id='center'>
+				<form action='newTask.php' method='post'>	
+				<textarea rows = '4' cols = '60' name='comment'></textarea>
+				<br />
+				<select size='1' name='priority'>
+					<option disabled selected>Приоритет задачи</option>
+					<option value='High'>Высокий</option>
+					<option value='Medium'>Средний</option>
+					<option value='Low'>Низкий</option>
+				</select>
+				<input type='submit' name='addnew' value='Добавить задачу'/>
+				</form>
+			</div>
+		</div>
 		</body>
 		</html>";
-} elseif($_POST['addnew']){
-	//JS проверка на пустое значение? 
-	if(empty($_POST['comment'])  || $_POST['priority'] == "Приоритет задачи"){
-		echo "Заполните все поля";
+} else if($_POST['addnew']){
+	if(empty($_POST['comment']) || (!isset($_POST['priority']))){
+		header("Location: newTask.php");
 	}else{
 		header('Location: tasks.php');
 		include("connect.php");

@@ -10,13 +10,26 @@
 </head>
 <body>
 <h2>Вход</h2>
-	<?php echo $err; ?>
-<div>
-	<form action='tryLogin.php' method='post'>
-		Пользователь: <input type='text' name='username'/><br/>
-		Пароль: <input type='password' name='password'/><br/>
-		<input type='submit' name='submit' value='Login' />
-	 </form>
+<h5><?php echo $err; ?></h5>
+<div id='middle_section'>
+	<div align="center">
+		<form action='tryLogin.php' method='post'>
+			<table border="0">
+				<tr>
+					<td><label for="username">Пользователь:</label></td>
+					<td><input type='text' name='username' id="username" /><br/></td>
+				</tr>
+				<tr>
+					<td><label for="password">Пароль:</label></td>
+					<td><input type='password' name='password'id="password" /><br /></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center"><input type='submit' name='submit' value='Login' /></td>
+				</tr>
+ 			</table>
+		 </form>
+	 </div>
 </div>
+
 </body>
 </html>

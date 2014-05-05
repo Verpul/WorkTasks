@@ -27,18 +27,23 @@ mysql_close($connect);
 
 <html>
 <head>
+<link href="style.css" rel="stylesheet" type="text/css" /> 
 	<title>Изменить задачу</title>
 </head>
 <body>
 <h2>Редактировать задачу</h2>
-<?php
-	echo "<form action='updateTask.php' method='post'>
-	<textarea rows='4' cols='60' name='comment'>$comment </textarea><br />
-	<input type='submit' name = 'updateTask[{$selected}]' value='Готово' />	
-	</form>
-	<form action='updateTask.php' method='post'>
-	<input type='submit' name='deleteTask[{$selected}]' value='Удалить задание' />
-	</form>";
-?>
+<div id='middle_section'>
+	<div id='center'>
+		<?php
+			echo "<form action='updateTask.php' method='post'>
+			<textarea rows='4' cols='60' name='comment'>$comment </textarea><br />
+			<input type='submit' name = 'updateTask[{$selected}]' value='Готово' />	
+			</form>
+			<form action='updateTask.php' method='post'>
+			<input type='submit' name='deleteTask[{$selected}]' value='Удалить задание' />
+			</form>";
+		?>
+	</div>
+</div>
 </body>
 </html>

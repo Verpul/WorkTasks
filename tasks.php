@@ -3,21 +3,19 @@ include("session.php");
 ?>
 <html>
 <head>
-	<script type="text/javascript">
-		function disabled(){
-
-		}
-	</script>
+<link href="style.css" rel="stylesheet" type="text/css" /> 
 </head>
 <body>
 	<h2>Мои задачи</h2>
-
+<div  align ="center" id="middle_section">
 	<form action='newTask.php' method='post'>
 		<input type='submit' name = 'addmission' value='Добавить задачу' />
 	 </form>
 <?php
 /*
 Номер страницы 
+LIMIT 0, 30;
+LIMIT 30, 30;
 */
 	if(!empty($_POST['close'])){
 		$selected = key($_POST['close']);
@@ -30,8 +28,8 @@ include("session.php");
 	include("connect.php");
 	$query = ("SELECT * FROM missions ORDER BY date DESC");
 	$result = mysql_query($query);
-	echo "<table border='1'>
-			<tr><td>Приоритет</td><td>Описание</td><td>Статус</td></tr>";	
+	echo "<table id='tasksTable'>
+			<tr><td id='center' class='tableBorder'>Приоритет</td><td id='center' class='tableBorder'>Описание</td><td id='center' class='tableBorder'>Статус</td></tr>";	
 	while($row = mysql_fetch_assoc($result)){
 		$disable = $row['closed'] == 0 ? '':'disabled';
 		$status = $row['closed'] == 0 ? 'Не выполнена':'Выполнена';
@@ -39,15 +37,15 @@ include("session.php");
 		$firstDate = substr($row['date'], 0, 10);
 
 		if($firstDate < $secondDate || $secondDate == NULL){
-			echo "<tr><td>{$firstDate}</tr></td>";	
+			echo "<tr><td colspan='3' id='center' class='tableBorder'>{$firstDate}</tr></td>";	
 		}
 		$secondDate = $firstDate;
-
-		echo "<tr><td>{$row['priority']}</td>
-				<td>{$row['comment']}</td>
-				<td>{$status}</td>
+		$comm  = $row['comment'];
+		echo "<tr><td id='center' class='tableBorder'>{$row['priority']}</td>
+				<td id='comment' class='tableBorder'>{$comm}</td>
+				<td id='center' class='tableBorder'>{$status}</td>
 				<form action='tasks.php' method='post'>
-				<td><input type='submit' name = 'close[{$row['id']}]' value='Закрыть' $disable /></td>
+				<td ><input type='submit' name = 'close[{$row['id']}]' value='Закрыть' $disable /></td>
 				</form>	
 				<form action='updateTask.php' method='post'>
 				<td><input type='submit' name = 'update[{$row['id']}]' value='Редактировать' $disable /></td></tr>
@@ -56,5 +54,6 @@ include("session.php");
 	echo "</table>";
 	mysql_close($connect);
 ?>
+</div>
 </body>
 </html>.
