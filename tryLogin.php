@@ -1,11 +1,11 @@
 <?php
-session_start();
+require 'sessionCode/session.php';
 $_SESSION['error'] = "";
 if(empty($_POST['username']) || empty($_POST['password'])){
-	$_SESSION['error'] = "Не заполнен логин или пароль";
+	$_SESSION['error'] = "РќРµ Р·Р°РїРѕР»РЅРµРЅ Р»РѕРіРёРЅ РёР»Рё РїР°СЂРѕР»СЊ";
 	header("Location: index.php");
 } else {
-	include("connect.php");
+	require("dbCode/connect.php");
 	$query = sprintf("SELECT username, password FROM users WHERE username = '%s' AND password ='%s'", mysql_real_escape_string($_POST['username']),
 																										mysql_real_escape_string($_POST['password']));
 	$result = mysql_query($query);
@@ -13,10 +13,9 @@ if(empty($_POST['username']) || empty($_POST['password'])){
 		header("Location: tasks.php");
 		$_SESSION['logged'] = true;
 	} else {
-		$_SESSION['error'] = "Неверный логин или пароль";
+		$_SESSION['error'] = "РќРµРІРµСЂРЅС‹Р№ Р»РѕРіРёРЅ РёР»Рё РїР°СЂРѕР»СЊ";
 		header("Location: index.php");
 }
 	mysql_close($connect);
 }
-
 ?>

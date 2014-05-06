@@ -1,31 +1,18 @@
 <?php
-include("session.php");
+require 'sessionCode/session.php';
 if($_POST['addmission'] || empty($_POST['addnew'])){
-	echo "<html><head><link href='style.css' rel='stylesheet' type='text/css' /> </head><body>
-		<h2>Добавить новую задачу</h2>
-		<div id='middle_section'>
-			<div id='center'>
-				<form action='newTask.php' method='post'>	
-				<textarea rows = '4' cols = '60' name='comment'></textarea>
-				<br />
-				<select size='1' name='priority'>
-					<option disabled selected>Приоритет задачи</option>
-					<option value='High'>Высокий</option>
-					<option value='Medium'>Средний</option>
-					<option value='Low'>Низкий</option>
-				</select>
-				<input type='submit' name='addnew' value='Добавить задачу'/>
-				</form>
-			</div>
-		</div>
-		</body>
-		</html>";
+	$h2 = "Р”РѕР±Р°РІРёС‚СЊ РЅРѕРІСѓСЋ Р·Р°РґР°С‡Сѓ";
+	$err = loginError();
+	require 'header.php';
+	require 'templates/newTask.html';		
+	require 'footer.html';
 } else if($_POST['addnew']){
 	if(empty($_POST['comment']) || (!isset($_POST['priority']))){
 		header("Location: newTask.php");
+		$_SESSION['error'] = "Р—Р°РїРѕР»РЅРёС‚Рµ РІСЃРµ РїРѕР»СЏ";
 	}else{
 		header('Location: tasks.php');
-		include("connect.php");
+		require("dbCode/connect.php");
 		$time = date("Y:m:d H:i:s");
 		$query = "INSERT INTO missions(priority, comment, closed, date) VALUES (\"{$_POST['priority']}\", \"{$_POST['comment']}\", 
 																				'0', CAST('".$time."' AS datetime))";
