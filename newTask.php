@@ -12,12 +12,11 @@ if($_POST['addmission'] || empty($_POST['addnew'])){
 		$_SESSION['error'] = "Заполните все поля";
 	}else{
 		header('Location: tasks.php');
-		require("dbCode/connect.php");
+		require 'dbCode/connect.php';
 		$time = date("Y:m:d H:i:s");
-		$query = "INSERT INTO missions(priority, comment, closed, date) VALUES (\"{$_POST['priority']}\", \"{$_POST['comment']}\", 
-																				'0', CAST('".$time."' AS datetime))";
-		mysql_query($query);
-		mysql_close($connect);
+		$priority = $_POST['priority'];
+		$comment = $_POST['comment'];
+		insertTask($time, $priority, $comment);
 		}
 }
 ?>

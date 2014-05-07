@@ -1,3 +1,6 @@
+<?php if($firstDate < $secondDate || $secondDate == NULL): ?>
+	<tr><td colspan='3' id='center' class='tableBorder'><?= $firstDate ?></tr></td>
+<?php endif; ?>
 <tr>
 	<td id='center' class='tableBorder'><?= $priority ?></td>
 	<td id='comment' class='tableBorder'><?= $comm ?></td>
