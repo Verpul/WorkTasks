@@ -98,13 +98,18 @@ define('DB_PASSWORD', '');
 		}
 	}
 
-	function updateTask($id, $comment){
+	function updateTask($id, $comment, $close=false){
 		try{
 			$connect_str = DB_TYPE.': host='.DB_HOST.';dbname='.DB_NAME;
 			$connect = new PDO($connect_str, DB_USERNAME, DB_PASSWORD);
 			$connect->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-			$query = $connect->prepare("UPDATE missions SET comment=? WHERE id=?");
-			$query->bindParam(1, $comment);
+			if(!$close){
+				$query = $connect->prepare("UPDATE missions SET comment=? WHERE id=?");
+				$query->bindParam(1, $comment);
+			} else {
+				$query = $connect->prepare("UPDATE missions SET closed=? WHERE id=?");
+				$query->bindParam(1, $close);
+			}					
 			$query->bindParam(2, $id);
 			$query->execute();
 			$connect = null;
