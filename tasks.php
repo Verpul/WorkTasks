@@ -1,4 +1,5 @@
 <?php
+	require 'sessionCode/session.php';
     $h2 = "Мои задачи";
 	require 'header.php';
 	require 'dbCode/connect.php';

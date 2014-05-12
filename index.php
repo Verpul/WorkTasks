@@ -1,7 +1,7 @@
 <?php
+	session_start();
 	$h2 = 'Вход';
 	$values = array();
-
 	if($_POST['sendForm']){
 		$values['username'] = $_POST['username'];
 		$values['password'] = $_POST['password'];
@@ -12,7 +12,12 @@
 			require 'dbCode/connect.php';
 			$accept = login($values['username'], $values['password']);
 			if($accept){
-				header("Location: tasks.php");
+				if(empty($_SESSION['url'])){
+					header("Location: tasks.php");
+				} else {
+					header("Location: ".$_SESSION['url']);
+				}	
+				$_SESSION['authorized'] = true;
 				die();
 			} else {
 				$err = "Неверный логин или пароль";

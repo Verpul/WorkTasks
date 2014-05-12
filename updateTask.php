@@ -1,4 +1,5 @@
-﻿<?php
+<?php
+require 'sessionCode/session.php';
 require 'dbCode/connect.php';
 $selected = $_POST['id'];
 
@@ -15,5 +16,7 @@ if($_POST['changeTask']){
 } else if ($_POST['deleteTask']){
 	header('Location: tasks.php');
 	deleteTask($selected);
+} else{
+	header('Location: tasks.php');
 }
 ?>
