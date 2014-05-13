@@ -5,18 +5,20 @@ $selected = $_POST['id'];
 
 if($_POST['changeTask']){
 	$comment = showTask($selected);
-	$h2 = 'Редактировать задачу';
-	require 'header.php';
-	require 'templates/updateTask.php';		
-	require 'footer.html';
+	require 'templates/renderTemplate.php';
+	renderTemplate(array('updateTask.php'), array('h2'   => 'Редактировать задачу',
+									  			  'comment' => $comment,
+									  			  'selected' => $selected));
 } else if ($_POST['updateTask']){
-	header('Location: tasks.php');
 	$comment = $_POST['comment'];
 	updateTask($selected, $comment);
-} else if ($_POST['deleteTask']){
 	header('Location: tasks.php');
+} else if ($_POST['deleteTask']){
 	deleteTask($selected);
+	header('Location: tasks.php');
 } else{
 	header('Location: tasks.php');
 }
+
+
 ?>

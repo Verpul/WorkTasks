@@ -6,7 +6,7 @@
 		</tr>
 		<tr>
 			<td><label for="password">Пароль:</label></td>
-			<td><input type='password' name='password'id="password" value= <?= $values['password'] ?>><br /></td>
+			<td><input type='password' name='password' id="password"><br /></td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center"><input type='submit' name='sendForm' value='Login' /></td>

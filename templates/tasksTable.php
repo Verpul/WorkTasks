@@ -1,4 +1,4 @@
-<?php if($firstDate < $secondDate || $secondDate == NULL): ?>
+<?php if($secondDate == NULL ||$firstDate < $secondDate): ?>
 	<tr><td colspan='3' id='center' class='tableBorder'><?= $firstDate ?></tr></td>
 <?php endif; ?>
 <tr>

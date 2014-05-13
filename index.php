@@ -1,8 +1,7 @@
 <?php
 	session_start();
-	$h2 = 'Вход';
 	$values = array();
-	if($_POST['sendForm']){
+	if(!empty($_POST['sendForm'])){
 		$values['username'] = $_POST['username'];
 		$values['password'] = $_POST['password'];
 
@@ -16,6 +15,7 @@
 					header("Location: tasks.php");
 				} else {
 					header("Location: ".$_SESSION['url']);
+					unset($_SESSION['url']);
 				}	
 				$_SESSION['authorized'] = true;
 				die();
@@ -24,7 +24,8 @@
 			}
 		}
 	}
-	require 'header.php';
-	require 'templates/loginForm.php';
-	require 'footer.html'
+	require 'templates/renderTemplate.php';
+	renderTemplate(array('loginForm.php'), array('h2'   => 'Вход',
+									  			 'err'  => $err,
+									  			 'username' => $values['username']));
 ?>
