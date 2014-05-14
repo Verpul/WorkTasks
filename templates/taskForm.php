@@ -1,5 +1,5 @@
 <form action='newTask.php' method='post'>	
-	<textarea rows = '4' cols = '60' name='comment'><?= $values['comment'] ?></textarea>
+	<textarea rows = '4' cols = '60' name='comment'><?= htmlspecialchars($values['comment']) ?></textarea>
 	<br>
 	<select size='1' name='priority'>
 		<option disabled selected>Приоритет задачи</option>

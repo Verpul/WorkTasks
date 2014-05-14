@@ -1,19 +1,19 @@
 <?php if($secondDate == NULL ||$firstDate < $secondDate): ?>
-	<tr><td colspan='3' id='center' class='tableBorder'><?= $firstDate ?></tr></td>
+	<tr><td colspan='3' class='center tableBorder'><?= $firstDate ?></tr></td>
 <?php endif; ?>
 <tr>
-	<td id='center' class='tableBorder'><?= $priority ?></td>
-	<td id='comment' class='tableBorder'><?= $comm ?></td>
-	<td id='center' class='tableBorder'><?= $status ?></td>
-<form action='tasks.php' method='post'>
-	<td>
-		<input type='submit' name = 'close' value='Закрыть' <?= $disable ?> />
-		<input type='hidden' name='id' value= <?= $id ?> />
+	<td class='center tableBorder'><?= $priority ?></td>
+	<td class='comment tableBorder' id='comment'><?= $comm ?></td>
+	<td class='center tableBorder'><?= $status ?></td>
+	<td class='center'>
+		<form action='tasks.php' method='post'>
+			<input type='submit' name = 'close' value='Закрыть' <?= $disable ?> >
+			<input type='hidden' name = 'id' value = <?= $id ?> >
+		</form>	
 	</td>
-</form>	
-<form action='updateTask.php' method='post'>
-	<td>
-		<input type='submit' name = 'changeTask' value='Редактировать' <?= $disable ?> />
-		<input type='hidden' name = 'id' value = <?= $id ?> />
+	<td class='center'>
+		<form action='updateTask.php' method='post'>
+			<input type='submit' name = 'changeTask' value='Редактировать' <?= $disable ?> >
+			<input type='hidden' name = 'id' value = <?= $id ?> >
+		</form>
 	</td></tr>
-</form>
