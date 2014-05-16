@@ -1,5 +1,5 @@
 <?php
-	require_once 'lib/tasksFunctions.php';
+	require_once 'lib/db.php';
 	session_start();
 	$values = array();
 	if(!empty($_POST['sendForm'])){
@@ -25,6 +25,7 @@
 		}
 	}
 
+	require_once 'lib/renderTemplate.php';
 	renderTemplate(array('loginForm.php'), array('h2'   => 'Вход',
 									  			 'err'  => $err,
 									  			 'username' => $values['username']));
