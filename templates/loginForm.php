@@ -2,7 +2,7 @@
 	<table border="0">
 		<tr>
 			<td><label for="username">Пользователь:</label></td>
-			<td><input type='text' name='username' id="username" value= <?=  htmlspecialchars($values['username']); ?>><br/></td>
+			<td><input type='text' name='username' id="username" value= <?=  makeSpecial($values['username']); ?>><br/></td>
 		</tr>
 		<tr>
 			<td><label for="password">Пароль:</label></td>

@@ -1,11 +1,9 @@
 <?php
-require 'sessionCode/session.php';
-require 'dbCode/connect.php';
+require_once 'lib/tasksFunctions.php';
 $selected = $_POST['id'];
 
 if($_POST['changeTask']){
 	$comment = showTask($selected);
-	require 'templates/renderTemplate.php';
 	renderTemplate(array('updateTask.php'), array('h2'   => 'Редактировать задачу',
 									  			  'comment' => $comment,
 									  			  'selected' => $selected));

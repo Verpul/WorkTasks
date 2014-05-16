@@ -1,5 +1,5 @@
 <?php
-require 'sessionCode/session.php';
+require_once 'lib/tasksFunctions.php';
 $values = array();
 
 if(!empty($_POST['addnew'])){
@@ -9,7 +9,6 @@ if(!empty($_POST['addnew'])){
 	if(empty($values['comment']) || (!isset($values['priority']))){
 		$err = "Заполните все поля";
 	}else{		
-		require 'dbCode/connect.php';
 		$time = date("Y:m:d H:i:s");
 		$priority = $_POST['priority'];
 		$comment = $_POST['comment'];
@@ -19,7 +18,6 @@ if(!empty($_POST['addnew'])){
 	}
 }
 
-require 'templates/renderTemplate.php';
 renderTemplate(array('taskForm.php'), array('h2'   => 'Добавить новую задачу',
 								  			'err'  => $err,
 								  			'comment' => $values['comment']));

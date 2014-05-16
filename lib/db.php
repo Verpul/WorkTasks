@@ -5,23 +5,29 @@ define('DB_NAME', 'work');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 
+	function makeCrypt($crypt, $salt){
+		$crypt = md5(md5($crypt).md5($salt));
+		return $crypt;
+	}
+
 	function connect(){
-		$connect_str = DB_TYPE.': host='.DB_HOST.';dbname='.DB_NAME;
-		$connect = new PDO($connect_str, DB_USERNAME, DB_PASSWORD);
-		$connect->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+		static $connect = null;
+		if(!$connect){
+			$connect_str = DB_TYPE.': host='.DB_HOST.';dbname='.DB_NAME;
+			$connect = new PDO($connect_str, DB_USERNAME, DB_PASSWORD);
+			$connect->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+		}
 		return $connect;
 	}
 
 	function login($username, $password){
-		$crypt = md5(md5($password).md5($username));
+		$crypt = makeCrypt($password, $username);
 		$connect = connect();
-		echo $tro;
 		$query = $connect->prepare("SELECT username, password FROM users WHERE username = ? and password = ?");
 		$query->bindValue(1, $username);
 		$query->bindValue(2, $crypt);
 		$query->execute();
 		$count = $query->rowCount();
-		$connect = null;
 		if($count) return true;
 		return false;
 	}
@@ -32,7 +38,6 @@ define('DB_PASSWORD', '');
 		$query->execute();	
 		$all = $query->fetchAll();
 		return $all;
-		$connect = null;
 	}
 
 	function insertTask($time, $priority, $comment, $closed = false){ 
@@ -43,7 +48,6 @@ define('DB_PASSWORD', '');
 		$query->bindValue(3, $closed);
 		$query->bindValue(4, $time);
 		$query->execute();
-		$connect = null;
 	}
 
 	function showTask($id){
@@ -53,7 +57,6 @@ define('DB_PASSWORD', '');
 		$query->execute();
 		$count = $query->rowCount();
 		$comment = $query->fetch();
-		$connect = null;
 		if($count) return $comment['comment'];
 		return false;
 }
@@ -63,7 +66,6 @@ define('DB_PASSWORD', '');
 		$query = $connect->prepare("DELETE FROM missions WHERE id=?");
 		$query->bindValue(1, $id);
 		$query->execute();
-		$connect = null;
 	}
 
 	function updateTask($id, $comment, $close=false){
@@ -77,6 +79,5 @@ define('DB_PASSWORD', '');
 		}					
 		$query->bindValue(2, $id);
 		$query->execute();
-		$connect = null;
 	}	
 ?>
